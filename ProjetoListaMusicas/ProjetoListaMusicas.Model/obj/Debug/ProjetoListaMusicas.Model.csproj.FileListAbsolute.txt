@@ -1,0 +1,1 @@
+C:\Users\lucas 3\Downloads\C# projetos\Projeto Web\ProjetoListaMusicas\ProjetoListaMusicas.Model\obj\Debug\ProjetoListaMusicas.Model.csproj.CoreCompileInputs.cache

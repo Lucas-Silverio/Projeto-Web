@@ -4,6 +4,8 @@ using NHibernate.Cfg;
 using NHibernate.Cfg.MappingSchema;
 using NHibernate.Context;
 using NHibernate.Mapping.ByCode;
+using ProjetoListaMusicas.Model.Database.Model;
+using ProjetoListaMusicas.Model.Database.Repository;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -21,10 +23,16 @@ namespace ProjetoListaMusicas.Model.Database
 
         private ISessionFactory _sessionFactory;
 
+        public UsuarioRepository UsuarioRepository { get; set; }
+
+        public MusicaRepository MusicaRepository { get; set; }
+
         private DbFactory()
         {
             Conectar();
-            
+
+            this.UsuarioRepository = new UsuarioRepository(this.Session);
+            this.MusicaRepository = new MusicaRepository(this.Session);
         }
 
         public static DbFactory Instance => _instance ?? (_instance = new DbFactory());
@@ -146,7 +154,7 @@ namespace ProjetoListaMusicas.Model.Database
                 var mapper = new ModelMapper();
 
                 mapper.AddMappings(
-                    Assembly.GetAssembly(typeof()).GetTypes()
+                    Assembly.GetAssembly(typeof(UsuarioMap)).GetTypes()
                 );
 
                 return mapper.CompileMappingForAllExplicitlyAddedEntities();

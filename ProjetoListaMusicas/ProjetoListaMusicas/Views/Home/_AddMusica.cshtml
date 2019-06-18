@@ -1,0 +1,73 @@
+﻿@model ProjetoListaMusicas.Model.Database.Model.Musica
+
+@{
+    ViewBag.Title = "Adicionar Musica";
+}
+
+<script type="text/javascript">
+    function gravouMusica() {
+        $("#dlgAddMusica").modal("hide");
+        $('body').removeClass('modal-open');
+        $('.modal.backdrop').remove();
+    }
+</script>
+
+<div id="dlgAddMusica" role="dialog" class="modal fade">
+
+   @using (Ajax.BeginForm("GravarMusica", "Home", new AjaxOptions()
+   {
+       HttpMethod = "post",
+       UpdateTargetId = "tblMusicas",
+       InsertionMode = InsertionMode.Replace,
+       OnSuccess = "gravouMusica"
+   }))
+   {
+        @Html.AntiForgeryToken()
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Musica</h4>
+            </div>
+
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.Id)
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Banda, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Banda, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Banda, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Genero, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Genero, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Genero, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <div class="modal-footer form-horizontal">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal"> Cancelar </button>
+                    <input type="submit" value="Salvar" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+        }
+
+    </div>

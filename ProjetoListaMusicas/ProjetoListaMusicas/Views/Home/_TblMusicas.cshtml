@@ -1,0 +1,53 @@
+﻿@using ProjetoListaMusicas.Utils
+@model IEnumerable<ProjetoListaMusicas.Model.Database.Model.Musica>
+
+@{
+    ViewBag.Title = "Musicas";
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Banda)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Genero)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Banda)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Genero)
+            </td>
+            <td>
+                @Ajax.ActionLink("Editar", "EditarMusica", new { id = item.Id }, new AjaxOptions()
+               {
+                   HttpMethod = "Post",
+                   InsertionMode = InsertionMode.Replace,
+                   UpdateTargetId = "addMusica",
+                   OnSuccess = "abrirTelaAddMusica"
+               })
+
+                @Ajax.ActionLink("Apagar", "DeletarMusica", new { id = item.Id }, new AjaxOptions()
+               {
+                   HttpMethod = "Post",
+                   InsertionMode = InsertionMode.Replace,
+                   UpdateTargetId = "tblMusicas",
+               })
+            </td>
+        </tr>
+    }
+
+</table>

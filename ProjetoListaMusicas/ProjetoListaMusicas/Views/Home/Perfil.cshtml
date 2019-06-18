@@ -1,0 +1,35 @@
+﻿@using ProjetoListaMusicas.Utils
+@model ProjetoListaMusicas.Model.Database.Model.Usuario
+
+@{
+    ViewBag.Title = "Perfil";
+}
+
+<script type="text/javascript">
+    function abrirTelaEdtPerfil() {
+        $("#dlgPerfil").modal("show");
+    }
+</script>
+
+<h2>Perfil</h2>
+
+
+<div id="edtPerfil">
+
+</div>
+
+<div id="tblPerfil">
+    @Html.Partial("_TblPerfil", Model)
+</div>
+
+@Ajax.ActionLink("Editar Conta", "EdtPerfil", new { id = Model.Id }, new AjaxOptions()
+{
+    HttpMethod = "post",
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "edtPerfil",
+    OnSuccess = "abrirTelaEdtPerfil"
+})
+
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

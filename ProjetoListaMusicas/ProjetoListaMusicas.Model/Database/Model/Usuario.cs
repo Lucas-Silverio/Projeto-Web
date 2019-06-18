@@ -17,7 +17,7 @@ namespace ProjetoListaMusicas.Model.Database.Model
         public virtual String Nome { get; set; }
 
         [Required(ErrorMessage = "O Apelido é obrigatório.")]
-        [Display(Name = "Nickname")]
+        [Display(Name = "Username")]
         public virtual String Apelido { get; set; }
 
         [Required(ErrorMessage = "O E-mail é obrigatório.")]
@@ -26,7 +26,7 @@ namespace ProjetoListaMusicas.Model.Database.Model
         public virtual String Email { get; set; }
 
         [Required(ErrorMessage = "A Senha é obrigatória.")]
-        [Display(Name = "Password")]
+        [Display(Name = "Senha")]
         [DataType(DataType.Password)]
         public virtual String Senha { get; set; }
 
@@ -34,7 +34,7 @@ namespace ProjetoListaMusicas.Model.Database.Model
 
         [Required(ErrorMessage = "A Confirmação de Senha é obrigatória.")]
         [Compare("Senha", ErrorMessage = "Confirmação não compatível com a senha.")]
-        [Display(Name = "Password")]
+        [Display(Name = "Confirmar Senha")]
         [DataType(DataType.Password)]
         public virtual String ConfirmarSenha { get; set; }
 

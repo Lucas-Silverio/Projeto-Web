@@ -1,0 +1,32 @@
+﻿@using ProjetoListaMusicas.Utils
+@model IEnumerable<ProjetoListaMusicas.Model.Database.Model.Musica>
+
+@{
+    ViewBag.Title = "Principal";
+}
+
+<script type="text/javascript">
+    function abrirTelaAddMusica() {
+        $("#dlgAddMusica").modal("show");
+    }
+</script>
+
+<h2>Musicas</h2>
+
+@if (LoginUtils.Instance.Usuario != null)
+{
+    @Ajax.ActionLink("Adicionar Musica", "ExibirAddMusica", new AjaxOptions()
+{
+    HttpMethod = "post",
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "addMusica",
+    OnSuccess = "abrirTelaAddMusica"
+})
+}
+<div id="addMusica">
+
+</div>
+
+<div id="tblMusicas">
+    @Html.Partial("_TblMusicas", Model)
+</div>
